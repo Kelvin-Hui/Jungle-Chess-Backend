@@ -61,7 +61,7 @@ class Animal():
                     return True
                 else:
                     return False
-            return False
+        return False
 
     
 
@@ -117,29 +117,31 @@ class Lion(Animal):
             return False
 
     def validate_move(self , board : np.array , move_x : int ,move_y : int):
-        if (board[move_x][move_y]) == 0:
-            if self.acrossRiver(board,move_x,move_y):
-                self.setPosition((move_x,move_y))
-                return True
-            elif move_x in range(self.pos_x -1 , self.pos_x +1+1) and move_y == self.pos_y:
-                self.setPosition((move_x,move_y))
-                return True
-            elif  move_y in range(self.pos_y -1 , self.pos_y +1+1) and move_x == self.pos_x:
-                self.setPosition((move_x,move_y))
-                return True
-        else:
-            if self.acrossRiver(board,move_x,move_y):
-                if self.isCaptureable(board[move_x][move_y]):
+        if (move_x in range(self.pos_x -1 , self.pos_x +1+1) and move_y == self.pos_y) or (move_y in range(self.pos_y -1 , self.pos_y +1+1) and move_x == self.pos_x) :
+            if (board[move_x][move_y]) == 0:
+                if self.acrossRiver(board,move_x,move_y):
                     self.setPosition((move_x,move_y))
                     return True
-                else:
-                    return False
+                elif move_x in range(self.pos_x -1 , self.pos_x +1+1) and move_y == self.pos_y:
+                    self.setPosition((move_x,move_y))
+                    return True
+                elif  move_y in range(self.pos_y -1 , self.pos_y +1+1) and move_x == self.pos_x:
+                    self.setPosition((move_x,move_y))
+                    return True
             else:
-                if self.isCaptureable(board[move_x][move_y]):
-                    self.setPosition((move_x,move_y))
-                    return True
+                if self.acrossRiver(board,move_x,move_y):
+                    if self.isCaptureable(board[move_x][move_y]):
+                        self.setPosition((move_x,move_y))
+                        return True
+                    else:
+                        return False
                 else:
-                    return False
+                    if self.isCaptureable(board[move_x][move_y]):
+                        self.setPosition((move_x,move_y))
+                        return True
+                    else:
+                        return False
+        return False
 
         
 
@@ -173,30 +175,31 @@ class Tiger(Animal):
         return False
 
     def validate_move(self , board : np.array , move_x : int ,move_y : int):
-        if (board[move_x][move_y]) == 0:
-            if self.acrossRiver(board,move_x,move_y):
-                self.setPosition((move_x,move_y))
-                return True
-            elif move_x in range(self.pos_x -1 , self.pos_x +1+1) and move_y == self.pos_y:
-                self.setPosition((move_x,move_y))
-                return True
-            elif  move_y in range(self.pos_y -1 , self.pos_y +1+1) and move_x == self.pos_x:
-                self.setPosition((move_x,move_y))
-                return True
-        else:
-            if self.acrossRiver(board,move_x,move_y):
-                if self.isCaptureable(board[move_x][move_y]):
+        if (move_x in range(self.pos_x -1 , self.pos_x +1+1) and move_y == self.pos_y) or (move_y in range(self.pos_y -1 , self.pos_y +1+1) and move_x == self.pos_x) :
+            if (board[move_x][move_y]) == 0:
+                if self.acrossRiver(board,move_x,move_y):
                     self.setPosition((move_x,move_y))
                     return True
-                else:
-                    return False
+                elif move_x in range(self.pos_x -1 , self.pos_x +1+1) and move_y == self.pos_y:
+                    self.setPosition((move_x,move_y))
+                    return True
+                elif  move_y in range(self.pos_y -1 , self.pos_y +1+1) and move_x == self.pos_x:
+                    self.setPosition((move_x,move_y))
+                    return True
             else:
-                if self.isCaptureable(board[move_x][move_y]):
-                    self.setPosition((move_x,move_y))
-                    return True
+                if self.acrossRiver(board,move_x,move_y):
+                    if self.isCaptureable(board[move_x][move_y]):
+                        self.setPosition((move_x,move_y))
+                        return True
+                    else:
+                        return False
                 else:
-                    return False
-        
+                    if self.isCaptureable(board[move_x][move_y]):
+                        self.setPosition((move_x,move_y))
+                        return True
+                    else:
+                        return False
+        return False
 
 
 class Leopard(Animal):
