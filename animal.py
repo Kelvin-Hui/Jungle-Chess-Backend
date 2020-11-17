@@ -70,6 +70,23 @@ class Animal():
 class Elephant(Animal):
     def __init__(self,x,y,team):
         super().__init__(x,y,8,team,"Elephant")
+    
+    def isCaptureable (self , enemy) -> bool:
+        if self.rank >= enemy.rank  and self.team != enemy.team:
+            if enemy.rank == 1:
+                return False
+            return True
+        elif (self.team == 0 and self.team != enemy.team):
+            if (enemy.pos_x,enemy.pos_y) in [(0,2),(0,4),(1,3)]:
+                return True
+        elif (self.team == 1 and self.team != enemy.team):
+            if (enemy.pos_x,enemy.pos_y) in [(8,2),(8,4),(7,3)]:
+                return True
+        else:
+            if enemy.rank == -9:
+                return True
+            return False
+
 
 class Lion(Animal):
     def __init__(self,x,y,team):
