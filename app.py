@@ -42,7 +42,7 @@ def handledisconnect():
 
         roomId = Sid_roomId[sid]
         winnermsg = "You Won!"
-        socketIo.emit('serverMsg',winnermsg , room=roomId)
+        socketIo.emit('infoServerMsg',winnermsg , room=roomId)
         socketIo.emit('get_log',{'logmsg': f"{Sid_UserName[sid]} left!"},room=roomId)
         socketIo.emit('get_log',{'logmsg': winnermsg},room=roomId)
         socketIo.emit('gameEnd',True,room=roomId)
@@ -73,7 +73,6 @@ def handledisconnect():
     print(f"\n [Active Game] : {Game} \n")
    
     
-
 
 
 @socketIo.on("create")
@@ -162,7 +161,7 @@ def handleleave(data):
         winnermsg = "You Won!"
         socketIo.emit('get_log',{'logmsg': f"{userName} left!"},room=roomId)
         socketIo.emit('get_log',{'logmsg': winnermsg},room=roomId)
-        socketIo.emit('serverMsg',winnermsg , room=roomId)
+        socketIo.emit('infoServerMsg',winnermsg , room=roomId)
         socketIo.emit('gameEnd',True,room=roomId)
 
     else:
@@ -209,14 +208,14 @@ def handlemove(data):
                 score[gameover[1]]+=1
                 updatedScore = score
                 socketIo.emit('update_score',updatedScore,room = roomId)
-                socketIo.emit('serverMsg',winnermsg , room=roomId)
+                socketIo.emit('infoServerMsg',winnermsg , room=roomId)
                 socketIo.emit('get_log',{'logmsg': winnermsg},room=roomId)
                 socketIo.emit('gameEnd',True,room=roomId)
         else:
             print(f"\n [Room : {roomId}][Board Movement by {Sid_UserName[sid]}] {move} Invalid \n")
-            socketIo.emit('serverMsg',"Invalid Move!" , room=sid)
+            socketIo.emit('errorServerMsg',"Invalid Move!" , room=sid)
     else:
-        socketIo.emit('serverMsg',"Not Your Piece",room=sid)
+        socketIo.emit('errorServerMsg',"Not Your Piece",room=sid)
 
 
 @socketIo.on('rematch')
@@ -238,14 +237,14 @@ def handlerematchresponse(data):
     res = data['res']
     if (res):
         board = Game.get(roomId)
-        socketIo.emit('serverMsg',"Resetting Everything" , room=roomId)
+        socketIo.emit('infoServerMsg',"Resetting Everything" , room=roomId)
         board.reset()
 
         socketIo.emit('update_array',{'array' : board.to2Darray()},room=roomId)
         socketIo.emit('gameEnd',False,room=sid)
         socketIo.emit('gameEnd',True,room=oppoent_sid)
     else:
-        socketIo.emit('serverMsg',f"Seem like {Sid_UserName[sid]} doesn't want a rematch" , room=oppoent_sid)
+        socketIo.emit('infoServerMsg',f"Seem like {Sid_UserName[sid]} doesn't want a rematch" , room=oppoent_sid)
 
 
 @socketIo.on("getboard")
