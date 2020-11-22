@@ -41,7 +41,7 @@ def handledisconnect():
     if len(player)== 2:
 
         roomId = Sid_roomId[sid]
-        winnermsg = "You Won!"
+        winnermsg = "Oppoent Left! You Won!"
         socketIo.emit('infoServerMsg',winnermsg , room=roomId)
         socketIo.emit('get_log',{'logmsg': f"{Sid_UserName[sid]} left!"},room=roomId)
         socketIo.emit('get_log',{'logmsg': winnermsg},room=roomId)
@@ -158,7 +158,7 @@ def handleleave(data):
     if len(player)== 2:
         player.remove(Sid_UserName[sid])
 
-        winnermsg = "You Won!"
+        winnermsg = "Oppoent Left! You Won!"
         socketIo.emit('get_log',{'logmsg': f"{userName} left!"},room=roomId)
         socketIo.emit('get_log',{'logmsg': winnermsg},room=roomId)
         socketIo.emit('infoServerMsg',winnermsg , room=roomId)
