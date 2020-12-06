@@ -1,5 +1,6 @@
 # Importing Library
 import numpy as np
+import copy
 from pprint import pprint
 from animal import *
 from dentrapriver import *
@@ -27,7 +28,7 @@ class Board():
         self.isEnd = True
 
     def to2Darray(self):
-        temp = self.board.copy()
+        temp = copy.deepcopy(self.board)
         
         for i in temp:
             for j in i:
