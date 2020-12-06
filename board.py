@@ -27,7 +27,15 @@ class Board():
         self.isEnd = True
 
     def to2Darray(self):
-        return [[j if type(j)== int else j.rank for j in i] for i in self.board]
+        temp = self.board
+        
+        for i in temp:
+            for j in i:
+                if type(j) not in [int,Den,Trap,River]:
+                    if j.team == 0:
+                        j.rank *= -1
+
+        return [[j if type(j)== int else j.rank for j in i] for i in temp]
 
 
     def setup(self) -> list:
@@ -37,7 +45,7 @@ class Board():
                      (2,0) : 1 , (2,2) : 5,
                      (2,4) : 3 , (2,-1) : 8,
 
-                     (0,3) : -1 ,                                            #Den
+                     (0,3) : -10 ,  #CHANGEDEN                                          #Den
 
                      (0,2) : -9 , (0,4) : -9 , (1,3) : -9,                      #Trap
 
@@ -64,7 +72,7 @@ class Board():
                         3 : "Wolf",
                         2 : "Cat",
                         1 : "Rat",
-                        -1 : "Den"
+                        -10 : "Den"  #CHANGEDEN
                     }
         team = 0
         for i in range(len(board)):
@@ -90,10 +98,10 @@ class Board():
             return False
 
     def checkGameover(self):
-        if self.board[0][3].rank != -1:  
+        if self.board[0][3].rank != -10:  #CHANGEDEN
             #print ("GameOver! Team {} won!".format(self.board[0][3].team))
             return (True,1)
-        elif self.board[8][3].rank != -1:
+        elif self.board[8][3].rank != -10: #CHANGEDEN
             #print ("GameOver! Team {} won!".format(self.board[8][3].team))
             return (True,0)
         else:

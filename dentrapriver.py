@@ -13,7 +13,7 @@ class Den():
         self.pos_x = x
         self.pos_y = y
         self.team = team
-        self.rank = -1
+        self.rank = -10   #CHANGEDEN
     def __repr__(self):
         return str(self.rank)
 
