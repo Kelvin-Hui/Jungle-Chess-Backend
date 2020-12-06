@@ -32,7 +32,7 @@ class Board():
         for i in temp:
             for j in i:
                 if type(j) not in [int,Den,Trap,River]:
-                    if j.team == 0:
+                    if j.team == 0 and j.rank > 0:
                         j.rank *= -1
 
         return [[j if type(j)== int else j.rank for j in i] for i in temp]
