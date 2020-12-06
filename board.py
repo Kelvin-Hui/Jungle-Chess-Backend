@@ -27,7 +27,7 @@ class Board():
         self.isEnd = True
 
     def to2Darray(self):
-        temp = self.board
+        temp = self.board.copy()
         
         for i in temp:
             for j in i:
