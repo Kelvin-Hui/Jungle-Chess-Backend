@@ -58,13 +58,14 @@ def handledisconnect():
 
     Sid_UserName.pop(sid)
     Sid_roomId.pop(sid)
-    #close_room(sid)
 
-    if (len(Sid_UserName) == 0):
-        Rooms.clear()
-        Game.clear()
-        # for i in Rooms.keys():
-        #     close_room(i)
+
+    # close_room(sid)
+    # if (len(Sid_UserName) == 0):
+    #     Rooms.clear()
+    #     Game.clear()
+    #     for i in Rooms.keys():
+    #         close_room(i)
         
     print(f"\n [Log] User : {sid} Disconnected. \n")
     print(f"\n [Log] ... Cleaning everything for this user ...")
